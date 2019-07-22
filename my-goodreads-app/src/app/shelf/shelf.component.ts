@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { BookService } from './book/book.service';
-import { Book } from './book/book.model';
+import { BookService } from '../shared/book.service';
+import { Book } from '../shared/book.model';
 
 @Component({
   selector: 'app-shelf',

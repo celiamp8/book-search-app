@@ -1,11 +1,8 @@
-import { Book } from './book.model';
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpParams } from '@angular/common/http';
+import { Book } from './book.model';
 
 @Injectable()
 export class BookService {
-
-  private bookIds = ['zyTCAlFPjgYC'];
 
   private books: Book[] = [
     new Book(
@@ -27,7 +24,7 @@ export class BookService {
     )
   ];
 
-  constructor(private http: HttpClient) { }
+  constructor() { }
 
   getBooks() {
     return this.books.slice();
@@ -35,10 +32,6 @@ export class BookService {
 
   setBooks(books: Book[]) {
     this.books = books;
-  }
-
-  getBookFromId(id: string) {
-    this.http.get('https://www.googleapis.com/books/v1/volumes/' + id).subscribe();
   }
 
 

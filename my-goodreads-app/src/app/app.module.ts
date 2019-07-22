@@ -6,7 +6,7 @@ import { AppComponent } from './app.component';
 import { HttpModule } from '@angular/http';
 import { BookComponent } from './shelf/book/book.component';
 import { ShelfComponent } from './shelf/shelf.component';
-import { BookService } from './shelf/book/book.service';
+import { BookService } from './shared/book.service';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';

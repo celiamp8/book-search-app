@@ -4,7 +4,7 @@ import { Subject, fromEvent } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { FormControl } from '@angular/forms';
 import { debounceTime, distinctUntilChanged, map } from 'rxjs/operators';
-import { Book } from '../shelf/book/book.model';
+import { Book, BookAdapter } from '../shared/book.model';
 
 @Component({
   selector: 'app-search',
@@ -18,7 +18,7 @@ export class SearchComponent implements OnInit {
   books: Book[];
   searchField: FormControl = new FormControl();
 
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient, private adapter: BookAdapter) {
   }
 
   ngOnInit() {
@@ -30,14 +30,8 @@ export class SearchComponent implements OnInit {
 
   search(term) {
     return this.http.get(this.searchUrl + term + this.maxResults)
-      .pipe(map((data: any[]) => data.items.map((item: any) => new Book(
-        item.id,
-        item.volumeInfo.title,
-        item.volumeInfo.authors[0],
-        item.volumeInfo.description,
-        item.volumeInfo.pageCount,
-        item.volumeInfo.imageLinks.thumbnail,
-      ))));
+      .pipe(map((data: any[]) => data.items.map((item: any) => this.adapter.adapt(item)
+      )));
   }
 
 }
