@@ -8,7 +8,7 @@
 <ul *ngIf="books">
   <li *ngFor="let book of books">
     <p>
-      {{book.title}}
+      <app-search-result [book]="book"></app-search-result>
     </p>
   </li>
 </ul>

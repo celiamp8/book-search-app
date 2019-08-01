@@ -1,7 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-// import { SearchService } from './search.service';
-import { Subject, fromEvent } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
+import { Component, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { debounceTime, distinctUntilChanged, map } from 'rxjs/operators';
 import { Book, BookAdapter } from '../shared/book.model';
@@ -22,13 +20,14 @@ export class SearchComponent implements OnInit {
   }
 
   ngOnInit() {
+    // TODO: codify input vals for url
     this.searchField.valueChanges
       .pipe(debounceTime(300), distinctUntilChanged())
       .subscribe(searchTerm => this.search(searchTerm)
         .subscribe(results => this.books = results));
   }
 
-  search(term) {
+  search(term: string) {
     return this.http.get(this.searchUrl + term + this.maxResults)
       .pipe(map((data: any[]) => data.items.map((item: any) => this.adapter.adapt(item)
       )));
